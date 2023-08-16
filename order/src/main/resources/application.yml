@@ -1,6 +1,8 @@
 spring:
   application:
     name: ORDER-SERVICE
+  config:
+    import: configserver:http://localhost:9296
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:3306/order
     username: root
@@ -15,11 +17,3 @@ server:
   address: 0.0.0.0
   servlet:
     context-path: /api
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
