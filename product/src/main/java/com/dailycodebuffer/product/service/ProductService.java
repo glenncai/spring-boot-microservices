@@ -25,4 +25,12 @@ public interface ProductService {
    * @return product response
    */
   ProductResponse getProductById(long id);
+
+  /**
+   * Reduce product quantity
+   *
+   * @param id       product id
+   * @param quantity quantity to reduce
+   */
+  void reduceQuantity(long id, long quantity);
 }
