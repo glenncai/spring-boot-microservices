@@ -1,6 +1,7 @@
 package com.dailycodebuffer.order.service.impl;
 
 import com.dailycodebuffer.order.entity.Order;
+import com.dailycodebuffer.order.external.client.ProductService;
 import com.dailycodebuffer.order.model.OrderRequest;
 import com.dailycodebuffer.order.repository.OrderRepository;
 import com.dailycodebuffer.order.service.OrderService;
@@ -23,6 +24,9 @@ public class OrderServiceImpl implements OrderService {
   @Resource
   private OrderRepository orderRepository;
 
+  @Resource
+  private ProductService productService;
+
   /**
    * Place order
    *
@@ -32,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public long placeOrder(OrderRequest orderRequest) {
     log.info("Placing order request: {}", orderRequest);
+
+    productService.reduceQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
+
     Order order = Order.builder()
                        .amount(orderRequest.getTotalAmount())
                        .orderStatus("CREATED")
