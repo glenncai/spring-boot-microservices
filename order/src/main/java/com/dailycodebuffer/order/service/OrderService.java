@@ -1,6 +1,7 @@
 package com.dailycodebuffer.order.service;
 
 import com.dailycodebuffer.order.model.OrderRequest;
+import com.dailycodebuffer.order.model.OrderResponse;
 
 /**
  * Order service
@@ -17,4 +18,12 @@ public interface OrderService {
    * @return order id
    */
   long placeOrder(OrderRequest orderRequest);
+
+  /**
+   * Get order details
+   *
+   * @param orderId order id
+   * @return order response body
+   */
+  OrderResponse getOrderDetails(long orderId);
 }

@@ -43,7 +43,7 @@ public class Order {
   private long quantity;
 
   /**
-   * Order timeline
+   * Order date
    */
   @Column(name = "order_date")
   private Instant orderDate;
