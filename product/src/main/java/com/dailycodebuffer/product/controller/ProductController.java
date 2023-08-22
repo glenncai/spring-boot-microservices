@@ -5,6 +5,7 @@ import com.dailycodebuffer.product.model.ProductResponse;
 import com.dailycodebuffer.product.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ public class ProductController {
    * @param productRequest product request body
    * @return product id
    */
+  @PreAuthorize("hasAuthority('Admin')")
   @PostMapping
   public ResponseEntity<Long> addProduct(@RequestBody ProductRequest productRequest) {
     long productId = productService.addProduct(productRequest);
@@ -47,6 +49,8 @@ public class ProductController {
    * @param id product id
    * @return product response
    */
+  @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority" +
+      "('SCOPE_internal')")
   @GetMapping("/{id}")
   public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") long id) {
     ProductResponse productResponse = productService.getProductById(id);
